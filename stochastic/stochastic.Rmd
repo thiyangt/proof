@@ -1,0 +1,122 @@
+---
+output: binb::metropolis
+fontsize: 12pt
+header-includes:
+   - \usepackage{amsfonts}
+   - \usepackage{mathrsfs}
+---
+
+```{r,setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+```
+
+# Theorem
+
+State $i$ is
+
+$$\text{ recurrent if } \sum_{n=1}^\infty P_{ii}^n=\infty,$$
+
+$$\text{ transient if } \sum_{n=1}^\infty P_{ii}^n < \infty,$$
+
+# Proof
+
+Let 
+
+\begin{equation*}
+I_n = \begin{cases}
+1 & \quad if \hspace{0.2cm}X_n = i, \\
+0 & \quad if \hspace{0.2cm}X_n \neq i.
+\end{cases}
+\end{equation*}
+
+--
+
+Then what about $\sum_{n=0}^{\infty}I_n$?
+
+---
+
+Then $\sum_{n=0}^{\infty}I_n$ represents the number of times that the process is in state $i$.
+
+---
+
+$$E\left[\sum_{n=0}^{\infty} I_n | X_0 = i\ \right ]$$
+
+---
+
+
+$$E\left[\sum_{n=0}^{\infty} I_n | X_0 = i\ \right ]$$ represents theexpected number of times the process is in state $i$, given the process was in $i$ at the beginning.
+
+--
+
+Given that the process starts at state $i$, what is the expected number of times that the process will be in state $i$.
+
+---
+
+$$E\left[\sum_{n=0}^{\infty} I_n | X_0 = i\ \right ]$$
+
+$$= \sum_{n=o}^\infty E \left[I_n |X_0 =i \right]$$
+---
+
+
+$$E\left[\sum_{n=0}^{\infty} I_n | X_0 = i\ \right ]$$
+
+$$= \sum_{n=o}^\infty E \left[I_n |X_0 =i \right]$$
+
+$$=\sum_{n=o}^\infty \left (1 P(I_n = 1|X_0=i)  + 0 P(I_n = 1|X_0=i)  \right)$$
+
+$$=\sum_{n=o}^\infty P(I_n = 1|X_0=i) $$ 
+
+---
+
+$$=\sum_{n=o}^\infty P(X_n = i|X_0=i) $$ 
+
+
+$$=\sum_{n=o}^\infty P_{ii}^n $$ 
+
+---
+
+## Corollary 1
+
+If state $i$ is recurrent, and state $i$ communicates with state $j$ ($i \leftrightarrow j$), then state $j$ is recurrent.
+
+---
+
+Since state $i$ communicates with state $j$, there exists $k$ and $m$ such that
+
+$$P_{ij}^{(k)} > 0$$
+
+$$P_{ji}^{(m)} > 0$$
+
+
+
+$$P_{jj}^{(m+n+k)} \geq P_{ji}^{(m)}P_{ii}^{(n)}P_{ij}^{(k)}$$
+
+---
+
+$$\sum_{n=0}^{\infty}P_{jj}^{(m+n+k)} \geq \sum_{n=0}^{\infty}P_{ji}^{(m)}P_{ii}^{(n)}P_{ij}^{(k)}$$
+
+$$\sum_{n=0}^{\infty}P_{jj}^{(m+n+k)} \geq P_{ji}^{(m)} P_{ij}^{(k)} \sum_{n=0}^{\infty}P_{ii}^{(n)}$$
+  
+---
+
+## Corollary 2
+
+In a Markov Chain with a finite number of states not all of the states can be transient (There should be at least one recurrent state). 
+
+Proof:
+
+Suppose not. Then the MC will runput of states not to go to an infinite number of times. This is a contradiction.
+
+---
+
+## Corollary 3
+
+If one state in an equivalent class is transient, then all other states in that class are also transient.
+
+Proof:
+
+Suppose not, i.e, suppose there is a recurrent state. Since all states in the equivalent class communicate, corollary 1 implies all states are recurrent. This is a contradiction.
+
+---
+
+
